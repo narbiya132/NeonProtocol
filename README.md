@@ -41,7 +41,7 @@ No build tools, package managers, or external JavaScript libraries are required.
 1. Clone this repository:
 
    ```bash
-   git clone https://github.com/YOUR-USERNAME/neon-protocol.git
+   git clone https://github.com/narbiya132/NeonProtocol.git
    ```
 
 2. Open the project folder:
@@ -53,7 +53,7 @@ No build tools, package managers, or external JavaScript libraries are required.
 3. Make sure the following files are present in the same directory:
 
    ```text
-   neon-protocol/
+   NeonProtocol/
    ├── index.html
    ├── style.css
    ├── game.js
@@ -87,7 +87,7 @@ NEON PROTOCOL uses the HTML Canvas API to render the arena and its entities, whi
 ## 📂 Project Structure
 
 ```text
-neon-protocol/
+NeonProtocol/
 ├── index.html    # Game interface and HUD
 ├── style.css     # Visual design and responsive styling
 ├── game.js       # Game engine and gameplay systems
