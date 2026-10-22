@@ -1,0 +1,175 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#080b14" />
+  <title>NEON PROTOCOL | Survival Arena</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="game-shell">
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="Neon Protocol home">
+        <span class="brand-icon">N<span>/</span></span>
+        <span>NEON<span class="muted">PROTOCOL</span></span>
+      </a>
+      <div class="top-status">
+        <span class="live-dot"></span>
+        SIMULATION <span class="muted">/ 01</span>
+      </div>
+      <button id="sound-btn" class="icon-btn" aria-label="Toggle sound">♫ <span>SOUND ON</span></button>
+    </header>
+
+    <section class="game-layout">
+      <aside class="side-panel left-panel">
+        <div class="eyebrow">OPERATIVE STATUS</div>
+        <div class="player-block">
+          <div class="avatar">N<span>07</span></div>
+          <div>
+            <div class="player-name">GHOST UNIT</div>
+            <div class="player-class">CLASS // PHANTOM</div>
+          </div>
+        </div>
+
+        <div class="stat-block">
+          <div class="stat-heading"><span>INTEGRITY</span><strong id="health-text">100 / 100</strong></div>
+          <div class="bar"><div id="health-bar" class="bar-fill health-fill"></div></div>
+        </div>
+
+        <div class="stat-block">
+          <div class="stat-heading"><span>ENERGY CORE</span><strong id="energy-text">100%</strong></div>
+          <div class="bar"><div id="energy-bar" class="bar-fill energy-fill"></div></div>
+        </div>
+
+        <div class="stat-block">
+          <div class="stat-heading"><span>THREAT LEVEL</span><strong id="threat-text">LOW</strong></div>
+          <div class="threat-meter"><i></i><i></i><i></i><i></i><i></i></div>
+        </div>
+
+        <div class="panel-divider"></div>
+        <div class="eyebrow">COMBAT INTEL</div>
+        <div class="intel-row"><span>ELIMINATIONS</span><strong id="kills">000</strong></div>
+        <div class="intel-row"><span>ACCURACY</span><strong id="accuracy">100%</strong></div>
+        <div class="intel-row"><span>BEST COMBO</span><strong id="best-combo">x1</strong></div>
+
+        <div class="panel-note">
+          <span class="note-icon">◈</span>
+          <div><strong>MISSION DIRECTIVE</strong><p>Stay mobile. Adapt. Survive the protocol.</p></div>
+        </div>
+      </aside>
+
+      <section class="arena-column">
+        <div class="arena-header">
+          <div>
+            <div class="eyebrow">LIVE COMBAT ZONE</div>
+            <h1>THE <span>GRID</span></h1>
+          </div>
+          <div class="wave-box">
+            <span class="eyebrow">CURRENT WAVE</span>
+            <strong id="wave-number">01</strong>
+          </div>
+        </div>
+
+        <div id="arena-wrap" class="arena-wrap">
+          <canvas id="game-canvas" aria-label="Neon Protocol game arena"></canvas>
+
+          <div id="start-screen" class="overlay">
+            <div class="overlay-content">
+              <div class="overline"><span class="live-dot"></span> SYSTEM READY</div>
+              <div class="hero-mark">N<span>/</span>P</div>
+              <h2>ENTER THE <span>GRID</span></h2>
+              <p>An unstable simulation. Endless threats.<br />One operative standing between order and chaos.</p>
+              <button id="start-btn" class="primary-btn">INITIALIZE RUN <span>↗</span></button>
+              <div class="start-foot">ROGUE SURVIVAL PROTOCOL <span>•</span> BUILD 01.07</div>
+            </div>
+          </div>
+
+          <div id="pause-screen" class="overlay hidden">
+            <div class="overlay-content">
+              <div class="eyebrow">SYSTEM HALTED</div>
+              <h2>RUN <span>PAUSED</span></h2>
+              <p>Your simulation is waiting.</p>
+              <button id="resume-btn" class="primary-btn">RESUME RUN <span>↗</span></button>
+              <div class="start-foot">PRESS ESC TO RESUME</div>
+            </div>
+          </div>
+
+          <div id="upgrade-screen" class="overlay hidden">
+            <div class="upgrade-content">
+              <div class="overline">◈ COMBAT EVOLUTION AVAILABLE</div>
+              <h2>CHOOSE YOUR <span>EDGE</span></h2>
+              <p class="upgrade-subtitle">Select one enhancement before the next wave.</p>
+              <div id="upgrade-options" class="upgrade-options"></div>
+              <div class="start-foot">ONE CHOICE. A DIFFERENT FUTURE.</div>
+            </div>
+          </div>
+
+          <div id="gameover-screen" class="overlay hidden">
+            <div class="overlay-content">
+              <div class="overline danger-text">■ SIGNAL LOST</div>
+              <h2>PROTOCOL <span>FAILED</span></h2>
+              <p>The grid has claimed another operative.</p>
+              <div class="result-grid">
+                <div><span>FINAL SCORE</span><strong id="final-score">0</strong></div>
+                <div><span>WAVES CLEARED</span><strong id="final-wave">0</strong></div>
+                <div><span>ELIMINATIONS</span><strong id="final-kills">0</strong></div>
+              </div>
+              <button id="restart-btn" class="primary-btn">REBOOT SIMULATION <span>↻</span></button>
+              <div class="start-foot">THE GRID REMEMBERS YOUR BEST.</div>
+            </div>
+          </div>
+
+          <div id="hud-score" class="arena-hud hidden">
+            <span>SCORE <strong id="score">000000</strong></span>
+            <span id="combo-display">COMBO <strong>x1</strong></span>
+          </div>
+          <div id="dash-indicator" class="dash-indicator hidden">DASH READY <span>SHIFT</span></div>
+          <div id="toast" class="toast hidden"></div>
+        </div>
+
+        <div class="arena-footer">
+          <div class="wave-progress-wrap">
+            <div class="progress-label"><span>WAVE PROGRESS</span><strong id="wave-progress-text">0 / 8</strong></div>
+            <div class="bar wave-progress"><div id="wave-progress-bar" class="bar-fill"></div></div>
+          </div>
+          <div class="footer-stat"><span>THREATS ACTIVE</span><strong id="enemy-count">0</strong></div>
+          <div class="footer-stat"><span>RUN TIME</span><strong id="run-time">00:00</strong></div>
+        </div>
+      </section>
+
+      <aside class="side-panel right-panel">
+        <div class="eyebrow">FIELD MANUAL</div>
+        <h3>CONTROLS<span>.</span></h3>
+        <div class="control-row"><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd><span>MOVE</span></div>
+        <div class="control-row"><kbd>MOUSE</kbd><span>AIM</span></div>
+        <div class="control-row"><kbd>CLICK</kbd><span>FIRE</span></div>
+        <div class="control-row"><kbd>SHIFT</kbd><span>DASH</span></div>
+        <div class="control-row"><kbd>E</kbd><span>ENERGY PULSE</span></div>
+        <div class="control-row"><kbd>ESC</kbd><span>PAUSE</span></div>
+
+        <div class="panel-divider"></div>
+        <div class="eyebrow">THREAT DATABASE</div>
+        <div class="enemy-entry"><span class="enemy-symbol drone">◇</span><div><strong>HUNTER</strong><p>Fast. Relentless. Closes distance.</p></div></div>
+        <div class="enemy-entry"><span class="enemy-symbol tank">⬡</span><div><strong>BRUTE</strong><p>Armored. Slow. Hits hard.</p></div></div>
+        <div class="enemy-entry"><span class="enemy-symbol sniper">△</span><div><strong>WRAITH</strong><p>Ranged. Fires aimed projectiles.</p></div></div>
+
+        <div class="panel-divider"></div>
+        <div class="eyebrow">PERSONAL RECORD</div>
+        <div class="record-score" id="record-score">000000</div>
+        <div class="record-label">ALL-TIME HIGH SCORE</div>
+        <div class="record-line"><span>STATUS</span><strong class="record-live">● OPERATIONAL</strong></div>
+        <div class="record-line"><span>UPGRADES</span><strong id="upgrade-count">0 INSTALLED</strong></div>
+      </aside>
+    </section>
+
+    <footer class="bottom-bar">
+      <span>NEON PROTOCOL <span class="muted">© 2026</span></span>
+      <span>DESIGNED FOR THE EDGE OF TOMORROW</span>
+      <span class="footer-version">HTML <i>•</i> CSS <i>•</i> JS</span>
+    </footer>
+  </main>
+  <script src="game.js"></script>
+</body>
+</html>
